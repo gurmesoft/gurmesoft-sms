@@ -15,10 +15,10 @@ class BaseProvider
     public function request()
     {
         $response   = false;
-        $ch         = curl_init();
-        curl_setopt_array($ch, $this->options);
+        $this->ch   = curl_init();
+        curl_setopt_array($this->ch, $this->options);
         try {
-            $response = curl_exec($ch);
+            $response = curl_exec($this->ch);
             $this->result->setResponse($response);
         } catch (Exception $e) {
             $this->result->setErrorMessage($e->getMessage);
