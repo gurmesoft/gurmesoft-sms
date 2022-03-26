@@ -30,13 +30,15 @@ composer require gurmesoft/sms:dev-master
 
 require 'vendor/autoload.php';
 
-$options = array(
+$provider = 'Netgsm';                       //Netgsm, IletiMerkezi, Verimor, Vatan
+$options  = array(
     'title'     => 'XXXXXXXX',              // Sms sağlayıcınızda tanımlı gönderim isminiz, başlığınız vb. 
     'apiKey'    => 'XXXXXXXX',              // Sms sağlayıcınız tarafından verilen anahtar, kullanıcı vb.
     'apiPass'   => 'XXXXXXXX',              // Sms sağlayıcınız tarafından verilen şifre, gizli anahtar vb.  
+    'userCode'  => 'XXXXXXXX',              // Sadece VatanSms için gereklidir.
 );
 
-$netgsm = new \GurmesoftSms\Client('Netgsm', $options);
+$netgsm = new \GurmesoftSms\Client($provider, $options); 
 ```
 
 ### Sms gönderme 
