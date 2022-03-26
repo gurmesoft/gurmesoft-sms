@@ -1,0 +1,13 @@
+{
+    "name": "gurmesoft/sms",
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-4": {
+        "GurmesoftSms\\": "src/"
+      }
+    },
+    "require": {
+      "php" : "^7.4",
+      "spatie/array-to-xml": "*"
+    }
+  }
