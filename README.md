@@ -20,7 +20,7 @@ Gurmesoft için üretilmiş sms entegrasyon pakedi.Netgsm, İletimerkezi, VatanS
 ## Adım 2
 `composer` kullanılarak paket yüklenir.
 ```bash
-composer require gurmesoft/cargo:dev-master
+composer require gurmesoft/sms:dev-master
 ```
 
 ## Adım 3 
