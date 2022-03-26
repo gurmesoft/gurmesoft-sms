@@ -120,7 +120,7 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
         $response                           = $this->request();
 
         if ($response) {
-            $response   = explode(' ', $response);
+            $response = explode(' ', $response);
         }
 
         if (!empty($response) && $response[0] === '00') {
