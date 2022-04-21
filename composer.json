@@ -7,7 +7,6 @@
       }
     },
     "require": {
-      "php" : "^7.4",
       "spatie/array-to-xml": "*"
     }
   }
