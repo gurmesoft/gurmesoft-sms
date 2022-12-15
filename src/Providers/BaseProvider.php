@@ -14,8 +14,8 @@ class BaseProvider
 
     public function request()
     {
-        $response   = false;
-        $this->ch   = curl_init();
+        $response = false;
+        $this->ch = curl_init();
         curl_setopt_array($this->ch, $this->options);
         try {
             $response = curl_exec($this->ch);

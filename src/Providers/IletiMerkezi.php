@@ -25,38 +25,36 @@ class IletiMerkezi extends \GurmesoftSms\Providers\BaseProvider
             $this->apiPass = $options['apiPass'];
         }
 
-        $this->options = array(
-           CURLOPT_RETURNTRANSFER   => 1,
-           CURLOPT_TIMEOUT          => 30,
-           CURLOPT_HTTPHEADER       => array('Content-Type: text/xml')
-        );
+        $this->options = [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_HTTPHEADER     => ['Content-Type: text/xml'],
+        ];
     }
 
     public function send($message, $number)
     {
-        $request    = array(
-            'authentication'    => array(
-                'username'          => $this->apiKey,
-                'password'          => $this->apiPass,
-            ),
-            'order'             => array(
-                'iys'               => 0,
-                'sender'            => $this->title,
-                'sendDateTime'      => '',
-            ),
-            'message'           => array(
-                'text'              => $message,
-                'receipents'        => array(
-                    'number'            => $number,
-                )
-            )
-        );
+        $request = [
+            'authentication' => [
+                'username' => $this->apiKey,
+                'password' => $this->apiPass,
+            ],
+            'order'          => [
+                'iys'          => 0,
+                'sender'       => $this->title,
+                'sendDateTime' => '',
+            ],
+            'message'        => [
+                'text'       => $message,
+                'receipents' => ['number' => $number],
+            ],
+        ];
 
         $this->arrayToXml($request, 'request');
-        $this->options[CURLOPT_URL]         = "{$this->url}/send-sms";
-        $this->options[CURLOPT_POSTFIELDS]  = $request;
-        $this->result                       = new \GurmesoftSms\Result;
-        $response                           = $this->request();
+        $this->options[CURLOPT_URL]        = "{$this->url}/send-sms";
+        $this->options[CURLOPT_POSTFIELDS] = $request;
+        $this->result = new \GurmesoftSms\Result;
+        $response     = $this->request();
 
         if ($response) {
             $response = simplexml_load_string($response);
@@ -77,23 +75,23 @@ class IletiMerkezi extends \GurmesoftSms\Providers\BaseProvider
 
     public function info($id)
     {
-        $request    = array(
-            'authentication'    => array(
-                'username'          => $this->apiKey,
-                'password'          => $this->apiPass,
-            ),
-            'order'             => array(
-                'id'                => $id,
-                'page'              => '',
-                'rowCount'          => '',
-            ),
-        );
+        $request = [
+            'authentication' => [
+                'username' => $this->apiKey,
+                'password' => $this->apiPass,
+            ],
+            'order'          => [
+                'id'       => $id,
+                'page'     => '',
+                'rowCount' => '',
+            ],
+        ];
 
         $this->arrayToXml($request, 'request');
-        $this->options[CURLOPT_URL]         = "{$this->url}/get-report";
-        $this->options[CURLOPT_POSTFIELDS]  = $request;
-        $this->result                       = new \GurmesoftSms\Result;
-        $response                           = $this->request();
+        $this->options[CURLOPT_URL]        = "{$this->url}/get-report";
+        $this->options[CURLOPT_POSTFIELDS] = $request;
+        $this->result = new \GurmesoftSms\Result;
+        $response     = $this->request();
 
         if ($response) {
             $response = simplexml_load_string($response);
@@ -101,7 +99,7 @@ class IletiMerkezi extends \GurmesoftSms\Providers\BaseProvider
 
         if (!empty($response) && $response->status->code == '200') {
             $this->result->setIsSuccess(true)
-            ->setOperationMessage("Undefined message use getResponse method")
+            ->setOperationMessage('Undefined message use getResponse method')
             ->setOperationCode($response->status->code);
         } else {
             $this->result->setErrorMessage($response->status->message)
@@ -113,18 +111,18 @@ class IletiMerkezi extends \GurmesoftSms\Providers\BaseProvider
 
     public function checkCredit()
     {
-        $request    = array(
-            'authentication'    => array(
-                'username'  => $this->apiKey,
-                'password'  => $this->apiPass,
-            ),
-        );
+        $request = [
+            'authentication' => [
+                'username' => $this->apiKey,
+                'password' => $this->apiPass,
+            ],
+        ];
 
         $this->arrayToXml($request, 'request');
-        $this->options[CURLOPT_URL]         = "{$this->url}/get-balance";
-        $this->options[CURLOPT_POSTFIELDS]  = $request;
-        $this->result                       = new \GurmesoftSms\Result;
-        $response                           = $this->request();
+        $this->options[CURLOPT_URL]        = "{$this->url}/get-balance";
+        $this->options[CURLOPT_POSTFIELDS] = $request;
+        $this->result = new \GurmesoftSms\Result;
+        $response     = $this->request();
 
         if ($response) {
             $response = simplexml_load_string($response);
