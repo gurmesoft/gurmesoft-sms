@@ -9,7 +9,7 @@ class BaseProvider
 {
     public function arrayToXml(array &$array, string $root)
     {
-        $array = ArrayToXml::convert($array, $root);
+        $array = ArrayToXml::convert($array, $root, true, 'UTF-8');
     }
 
     public function request()
