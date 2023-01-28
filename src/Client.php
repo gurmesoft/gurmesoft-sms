@@ -1,4 +1,5 @@
 <?php
+
 namespace GurmesoftSms;
 
 use Exception;
@@ -14,6 +15,11 @@ class Client
     public function send(string $message, array $numbers)
     {
         return $this->class->send($message, $numbers);
+    }
+
+    public function addDirectory(array $customer, string $group)
+    {
+        return $this->class->addDirectory($customer, $group);
     }
 
     public function info(string $id)

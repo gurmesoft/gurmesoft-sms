@@ -54,7 +54,7 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
         $this->arrayToXml($request, 'mainbody');
 
         $request = str_replace('<company>', '<company dil="TR">', $request);
-        
+
         $this->options[CURLOPT_URL]        = "{$this->url}/sms/send/xml";
         $this->options[CURLOPT_POSTFIELDS] = $request;
         $this->result = new \GurmesoftSms\Result;
@@ -67,12 +67,12 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
 
         if (!empty($response) && $response[0] === '00') {
             $this->result->setIsSuccess(true)
-            ->setOperationId($response[1])
-            ->setOperationMessage($this->responses($response[0]))
-            ->setOperationCode($response[0]);
+                ->setOperationId($response[1])
+                ->setOperationMessage($this->responses($response[0]))
+                ->setOperationCode($response[0]);
         } else {
             $this->result->setErrorMessage($this->responses($response[0]))
-            ->setErrorCode($response[0]);
+                ->setErrorCode($response[0]);
         }
 
         return $this->result;
@@ -98,8 +98,42 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
 
         if ($response) {
             $this->result->setIsSuccess(true)
-            ->setOperationMessage($response)
-            ->setOperationCode('00');
+                ->setOperationMessage($response)
+                ->setOperationCode('00');
+        }
+
+        return $this->result;
+    }
+
+    public function addDirectory($firstName, $lastName, $phone, $group)
+    {
+        $request = [
+            'usercode' => $this->apiKey,
+            'pwd' => $this->apiPass,
+            'grup' => $group,
+            'kayit' => [
+                'tel' => [
+                    'ad' => $firstName,
+                    'soyad' => $lastName,
+                    'telefon' => $phone,
+                ]
+            ],
+        ];
+
+        $this->arrayToXml($request, 'main');
+
+        $this->options[CURLOPT_URL]        = "{$this->url}/contacts/group/add";
+        $this->options[CURLOPT_POSTFIELDS] = $request;
+        $this->result = new \GurmesoftSms\Result;
+        $response     = $this->request();
+
+        if (!empty($response) && str_contains('<code>0</code>', $response)) {
+            $this->result->setIsSuccess(true)
+                ->setOperationMessage($this->responses('00'))
+                ->setOperationCode('00');
+        } else {
+            $this->result->setErrorMessage($this->responses('30'))
+                ->setErrorCode('30');
         }
 
         return $this->result;
@@ -128,12 +162,12 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
 
         if (!empty($response) && $response[0] === '00') {
             $this->result->setIsSuccess(true)
-            ->setCredit($response[1])
-            ->setOperationMessage($this->responses($response[0]))
-            ->setOperationCode($response[0]);
+                ->setCredit($response[1])
+                ->setOperationMessage($this->responses($response[0]))
+                ->setOperationCode($response[0]);
         } else {
             $this->result->setErrorMessage($this->responses($response[0]))
-            ->setErrorCode($response[0]);
+                ->setErrorCode($response[0]);
         }
 
         return $this->result;
