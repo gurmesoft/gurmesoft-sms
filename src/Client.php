@@ -17,9 +17,9 @@ class Client
         return $this->class->send($message, $numbers);
     }
 
-    public function addDirectory(array $customer, string $group)
+    public function addDirectory(string $firstName, string $lastName, string $phone, string $group)
     {
-        return $this->class->addDirectory($customer, $group);
+        return $this->class->addDirectory($firstName, $lastName, $phone, $group);
     }
 
     public function info(string $id)
