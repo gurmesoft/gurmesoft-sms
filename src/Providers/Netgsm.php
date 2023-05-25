@@ -34,7 +34,7 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
         ];
     }
 
-    public function send($message, $number)
+    public function send($message, $number, $filter)
     {
         $request = [
             'header' => [
@@ -46,10 +46,13 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
             ],
             'body'   => [
                 'msg' => $message,
-                'no'  => $number,
+                'no'  => $number
             ],
-
         ];
+
+        if (isset($filter)) {
+            $request["body"]["filter"] = $filter;
+        }
 
         $this->arrayToXml($request, 'mainbody');
 
