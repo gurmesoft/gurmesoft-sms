@@ -50,7 +50,7 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
             ],
         ];
 
-        if (isset($filter) && !empty($filter) && !$filter) {
+        if (isset($filter) && !empty($filter) && $filter) {
             $request["body"]["filter"] = $filter;
         }
 
