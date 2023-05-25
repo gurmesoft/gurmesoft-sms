@@ -46,11 +46,11 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
             ],
             'body'   => [
                 'msg' => $message,
-                'no'  => $number
+                'no'  => $number,
             ],
         ];
 
-        if (isset($filter)) {
+        if (isset($filter) && !empty($filter)) {
             $request["body"]["filter"] = $filter;
         }
 
