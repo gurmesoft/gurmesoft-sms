@@ -12,7 +12,7 @@ class Client
         $this->class = new $class($options);
     }
 
-    public function send(string $message, array $numbers, int|null|bool $filter)
+    public function send(string $message, array $numbers, int|null|bool $filter = null)
     {
         return $this->class->send($message, $numbers, $filter);
     }
