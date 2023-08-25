@@ -12,9 +12,9 @@ class Client
         $this->class = new $class($options);
     }
 
-    public function send(string $message, array $numbers, int|null|bool $filter = null)
+    public function send(string $message, array $numbers, int|null|bool $filter = null, null|int $appKey)
     {
-        return $this->class->send($message, $numbers, $filter);
+        return $this->class->send($message, $numbers, $filter, $appKey);
     }
 
     public function addDirectory(string $firstName, string $lastName, string $phone, string $group)

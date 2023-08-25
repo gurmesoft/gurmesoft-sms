@@ -34,7 +34,7 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
         ];
     }
 
-    public function send($message, $number, $filter)
+    public function send($message, $number, $filter, $appKey)
     {
         $request = [
             'header' => [
@@ -43,6 +43,7 @@ class Netgsm extends \GurmesoftSms\Providers\BaseProvider
                 'password'  => $this->apiPass,
                 'type'      => '1:n',
                 'msgheader' => $this->title,
+                'appkey'    => $appKey
             ],
             'body'   => [
                 'msg' => $message,
